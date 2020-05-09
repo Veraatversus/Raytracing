@@ -2,7 +2,7 @@
 
 namespace Raytracing {
 
-  public static class Vec3Ext {
+  public static class Vec3Math {
 
     #region Public Methods
 
@@ -69,11 +69,16 @@ namespace Raytracing {
     public static Vec3 operator *(Vec3 self, Vec3 other)
      => new Vec3 { X = self.X * other.X, Y = self.Y * other.Y, Z = self.Z * other.Z };
 
+    public static Vec3 operator *(Vec3 self, double other)
+     => new Vec3 { X = self.X * other, Y = self.Y * other, Z = self.Z * other };
+
     public static Vec3 operator /(Vec3 self, Vec3 other)
      => new Vec3(
               self.X / other.X,
               self.Y / other.Y,
               self.Z / other.Z);
+
+    public override string ToString() => $"{X}, {Y}, {Z}";
 
     #endregion Public Methods
   }

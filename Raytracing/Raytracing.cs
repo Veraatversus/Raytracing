@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+﻿using System;
 
 namespace Raytracing {
 
@@ -6,11 +6,20 @@ namespace Raytracing {
 
     #region Public Methods
 
-    public void Calculate() {
-      var width = 200;
-      var height = 200;
+    public static Vec3 GetColor(Ray ray) {
+      //return Color.FromArgb((int)Clamp(ray.Direction.X, 0, 1), (int)Clamp(ray.Direction.Y), (int)Clamp(ray.Direction.Z));
+      return Lerp(Clamp(ray.Direction.Y), new Vec3(0.5F, 0.7F, 1.0F), new Vec3(1, 1, 1));
+    }
 
-      var image = new Color[width * height];
+    public static double Clamp(double value, double min = 0, double max = 1) => Math.Max(Math.Min(value, max), min);
+
+    public static Vec3 Lerp(double t, Vec3 a, Vec3 b) => a * (1 - t) + b * t;
+
+    public void Calculate() {
+      var width = 256;
+      var height = 256;
+
+      var image = new Vec3[width * height];
 
       var origin = new Vec3();
       //var direction = new Vec3(0, 0, -1);
@@ -25,16 +34,17 @@ namespace Raytracing {
       var i = 0;
       for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-          var xCoord = lowerLeftCorner.X + horizontal.X / width;
-          var yCoord = lowerLeftCorner.Y + vertical.Y / height;
+          var xCoord = lowerLeftCorner.X + x * horizontal.X / width;
+          var yCoord = lowerLeftCorner.Y + y * vertical.Y / height;
           var zCoord = virtDist;
 
-          var ray = new Ray(origin, new Vec3(xCoord, yCoord, zCoord));
+          var primary = new Ray(origin, new Vec3(xCoord, yCoord, zCoord));
+          image[i] = GetColor(primary);
+          //image[i] = new Vec3(Convert.ToInt32(primary.Direction.X / (double)width * 255), Convert.ToInt32(primary.Direction.Y / (double)height * 255), 0);
 
-          var color = IntersectScene(ray);
+          //var color = IntersectScene(ray);
 
-          image[i] = color;
-          //image[i] = Color.FromArgb(Convert.ToInt32(x / (double)width * 255), Convert.ToInt32(y / (double)height * 255), 0);
+          //Debug.WriteLine(primary);
           i++;
         }
       }
