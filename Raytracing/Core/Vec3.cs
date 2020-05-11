@@ -13,16 +13,16 @@ namespace Raytracing {
                   self.X * other.Y - self.Y * other.X);
     }
 
-    public static double Dot(this Vec3 self, Vec3 other) => (self.X * other.X) + (self.Y * other.Y) + (self.Z * other.Z);
+    public static float Dot(this Vec3 self, Vec3 other) => (self.X * other.X) + (self.Y * other.Y) + (self.Z * other.Z);
 
     public static Vec3 Normalize(this Vec3 self) {
       var length = self.Lenght();
       return new Vec3(self.X / length, self.Y / length, self.Z / length);
     }
 
-    public static double Lenght(this Vec3 self) => Math.Sqrt(self.SquareLenght());
+    public static float Lenght(this Vec3 self) => MathF.Sqrt(self.SquareLenght());
 
-    public static double SquareLenght(this Vec3 self) => (self.X * self.X) + (self.Y * self.Y) + (self.Z * self.Z);
+    public static float SquareLenght(this Vec3 self) => (self.X * self.X) + (self.Y * self.Y) + (self.Z * self.Z);
 
     #endregion Public Methods
   }
@@ -31,19 +31,17 @@ namespace Raytracing {
 
     #region Public Properties
 
-    public double[] Data { get; set; } = new double[3];
+    public float X { get; set; }
 
-    public double X { get => Data[0]; set => Data[0] = value; }
+    public float Y { get; set; }
 
-    public double Y { get => Data[1]; set => Data[1] = value; }
+    public float Z { get; set; }
 
-    public double Z { get => Data[2]; set => Data[2] = value; }
+    public float R { get => X; set => X = value; }
 
-    public double R { get => Data[0]; set => Data[0] = value; }
+    public float G { get => Y; set => Y = value; }
 
-    public double G { get => Data[1]; set => Data[1] = value; }
-
-    public double B { get => Data[2]; set => Data[2] = value; }
+    public float B { get => Z; set => Z = value; }
 
     #endregion Public Properties
 
@@ -52,7 +50,7 @@ namespace Raytracing {
     public Vec3() {
     }
 
-    public Vec3(double x, double y, double z) {
+    public Vec3(float x, float y, float z) {
       (X, Y, Z) = (x, y, z);
     }
 
@@ -69,14 +67,14 @@ namespace Raytracing {
     public static Vec3 operator *(Vec3 self, Vec3 other)
      => new Vec3 { X = self.X * other.X, Y = self.Y * other.Y, Z = self.Z * other.Z };
 
-    public static Vec3 operator *(Vec3 self, double other)
+    public static Vec3 operator *(Vec3 self, float other)
      => new Vec3 { X = self.X * other, Y = self.Y * other, Z = self.Z * other };
 
     public static Vec3 operator /(Vec3 self, Vec3 other)
-     => new Vec3(
-              self.X / other.X,
-              self.Y / other.Y,
-              self.Z / other.Z);
+     => new Vec3(self.X / other.X, self.Y / other.Y, self.Z / other.Z);
+
+    public static Vec3 operator /(Vec3 self, float other)
+     => new Vec3(self.X / other, self.Y / other, self.Z / other);
 
     public override string ToString() => $"{X}, {Y}, {Z}";
 
