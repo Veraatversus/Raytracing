@@ -15,12 +15,10 @@ namespace Raytracing {
     }
 
     #endregion Public Constructors
-
     #region Private Methods
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
-      var t = new Raytrace();
-      t.Calculate();
+      Raytrace.Calculate();
     }
 
     #endregion Private Methods
