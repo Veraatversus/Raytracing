@@ -7,8 +7,8 @@
       Fuzz = fuzz;
     }
 
-    public Vec3 Color { get; }
-    public float Fuzz { get; }
+    public Vec3 Color { get; set; }
+    public float Fuzz { get; set; }
 
     public (Vec3 color, Ray ray) Scatter(Ray rIn, HitRecord hitRec) {
       var reflect = rIn.Direction.Reflect(hitRec.N);

@@ -6,7 +6,7 @@
       Color = color;
     }
 
-    public Vec3 Color { get; }
+    public Vec3 Color { get; set; }
 
     public (Vec3 color, Ray ray) Scatter(Ray rIn, HitRecord hitRec) {
       var scatteredDirection = hitRec.N + MathR.RandomPointInSphere();

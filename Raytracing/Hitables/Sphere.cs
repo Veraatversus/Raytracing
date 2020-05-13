@@ -43,7 +43,7 @@ namespace Raytracing {
         if (t < tMax && t > tMin) {
           var intersect = ray.PointAtParameter(t);
           var normal = (intersect - Center) / Radius;
-          return new HitRecord(t, intersect, normal, Material);
+          return new HitRecord(t, intersect, normal, ray, Material);
         }
       }
       return null;

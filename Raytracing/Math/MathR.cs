@@ -25,6 +25,13 @@ namespace Raytracing {
 
     public static Vec3 Reflect(this Vec3 self, Vec3 other) => self - (other * Dot(self, other) * 2);
 
+    public static Vec3 Refract(this Vec3 uv, Vec3 n, float etaiOverEtat) {
+      var cosTheta = Math.Min(-MathR.Dot(uv, n), 1);
+      var rOutParallel = (uv + n * cosTheta) * etaiOverEtat;
+      var rOutPerpendicular = n * -MathF.Sqrt(1 - Math.Min(rOutParallel.SquareLenght(), 1));
+      return rOutPerpendicular + rOutParallel;
+    }
+
     public static float Clamp(this float value, float min = 0F, float max = 1F) => Math.Max(Math.Min(value, max), min);
 
     public static float Uniform(this float min, float max) {
