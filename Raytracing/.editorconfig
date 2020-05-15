@@ -1,4 +1,4 @@
-# Rules in this file were initially inferred by Visual Studio IntelliCode from the E:\Proggn\Projects\GitRepos\GitRepos\Raytracing\Raytracing\ codebase based on best match to current usage at 12.05.2020
+# Rules in this file were initially inferred by Visual Studio IntelliCode from the E:\Proggn\Projects\GitRepos\GitRepos\Raytracing\Raytracing\ codebase based on best match to current usage at 15.05.2020
 # You can modify the rules from these initially generated values to suit your own policies
 # You can learn more about editorconfig here: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
 [*.cs]
@@ -15,8 +15,12 @@ dotnet_sort_system_directives_first                                      = true
 
 #Formatting - spacing options
 
+#require NO space between a cast and the value
+csharp_space_after_cast                                                  = false
 #require a space before the colon for bases or interfaces in a type declaration
 csharp_space_after_colon_in_inheritance_clause                           = true
+#require a space after a keyword in a control flow statement such as a for loop
+csharp_space_after_keywords_in_control_flow_statements                   = true
 #require a space before the colon for bases or interfaces in a type declaration
 csharp_space_before_colon_in_inheritance_clause                          = true
 #remove space within empty argument list parentheses
@@ -69,3 +73,9 @@ dotnet_style_predefined_type_for_locals_parameters_members               = true 
 
 #prefer properties not to be prefaced with this. or Me. in Visual Basic
 dotnet_style_qualification_for_property                                  = false : suggestion
+
+# ET002: Namespace does not match file path or default namespace
+dotnet_diagnostic.ET002.severity                                         = silent
+
+# IDE0011: Geschweifte Klammern hinzufügen
+csharp_prefer_braces                                                     = when_multiline : suggestion

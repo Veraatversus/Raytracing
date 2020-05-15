@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using System.Windows;
 
 namespace Raytracing {
 
@@ -6,5 +8,19 @@ namespace Raytracing {
   /// Interaction logic for App.xaml
   /// </summary>
   public partial class App : Application {
+    public App() {
+      AllocConsole();
+      Task.Run(() => {
+        var cv = new CoreValues {
+          Samplecount = 100,
+          maxDepth = 20,
+        };
+        Raytrace.Calculate(cv);
+      });
+
+    }
+
+    [DllImport("Kernel32")]
+    private static extern void AllocConsole();
   }
 }

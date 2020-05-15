@@ -18,7 +18,7 @@ namespace Raytracing {
     public Sphere() {
     }
 
-    public Sphere(Vec3 center, float radius, IMaterial material) {
+    public Sphere(Vec3 center, float radius, IMaterial material) : this() {
       Center = center;
       Radius = radius;
       Material = material;

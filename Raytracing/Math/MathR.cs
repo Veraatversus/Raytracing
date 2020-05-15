@@ -27,14 +27,12 @@ namespace Raytracing {
 
     public static Vec3 Refract(this Vec3 uv, Vec3 n, float etaiOverEtat) {
       var cosTheta = Math.Min(-MathR.Dot(uv, n), 1);
-      var rOutParallel = (uv + n * cosTheta) * etaiOverEtat;
+      var rOutParallel = (uv + (n * cosTheta)) * etaiOverEtat;
       var rOutPerpendicular = n * -MathF.Sqrt(1 - Math.Min(rOutParallel.SquareLenght(), 1));
       return rOutPerpendicular + rOutParallel;
     }
 
     public static float Clamp(this float value, float min = 0F, float max = 1F) => Math.Max(Math.Min(value, max), min);
-
-
 
     public static float Uniform(this float min, float max) {
       var random = new Random();
@@ -50,6 +48,7 @@ namespace Raytracing {
         return p;
       }
     }
+
     public static Vec3 RandomPointInDisc(float min = -1, float max = 1, float squareLenght = 1) {
       while (true) {
         var p = new Vec3(Uniform(min, max), Uniform(min, max), 0);
@@ -58,11 +57,18 @@ namespace Raytracing {
         return p;
       }
     }
-   
+
     public static float ConvertDegreesToRadians(float degrees) {
       var radians = MathF.PI / 180 * degrees;
       return radians;
     }
+
+    public static float Schlick(float cosine, float refIndex) {
+      var r0 = (1 - refIndex) / (1 + refIndex);
+      r0 *= r0;
+      return r0 - ((1 - r0) * MathF.Pow((1 - cosine), 5));
+    }
+
     #endregion Public Methods
 
     #region Private Fields

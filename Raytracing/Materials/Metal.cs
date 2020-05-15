@@ -2,13 +2,24 @@
 
   public class Metal : IMaterial {
 
+    #region Public Properties
+
+    public Vec3 Color { get; set; }
+
+    public float Fuzz { get; set; }
+
+    #endregion Public Properties
+
+    #region Public Constructors
+
     public Metal(Vec3 color, float fuzz) {
       Color = color;
       Fuzz = fuzz;
     }
 
-    public Vec3 Color { get; set; }
-    public float Fuzz { get; set; }
+    #endregion Public Constructors
+
+    #region Public Methods
 
     public (Vec3 color, Ray ray) Scatter(Ray rIn, HitRecord hitRec) {
       var reflect = rIn.Direction.Reflect(hitRec.N);
@@ -20,5 +31,7 @@
       }
       return default;
     }
+
+    #endregion Public Methods
   }
 }

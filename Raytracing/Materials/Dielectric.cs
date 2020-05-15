@@ -25,7 +25,7 @@ namespace Raytracing.Materials {
       var nOverNP = hitRec.IsFrontFace ? (1 / RefIndex) : RefIndex;
       var unitDirection = rIn.Direction.Normalize();
       var cosAlpha = Math.Min(MathR.Dot(unitDirection * -1, hitRec.N), 1.0F);
-      var sinAlpha = MathF.Sqrt(1.0F - cosAlpha * cosAlpha);
+      var sinAlpha = MathF.Sqrt(1.0F - (cosAlpha * cosAlpha));
 
       if (nOverNP * sinAlpha > 1) {
         var reflect = MathR.Reflect(unitDirection, hitRec.N);
@@ -34,7 +34,7 @@ namespace Raytracing.Materials {
       }
 
       //Reflection
-      var reflectionProp = Schlick(cosAlpha, RefIndex);
+      var reflectionProp = MathR.Schlick(cosAlpha, RefIndex);
       if (MathR.Uniform(0, 1) < reflectionProp) {
         var reflect = MathR.Reflect(unitDirection, hitRec.N);
         var scatterRay = new Ray(hitRec.P, reflect);
@@ -45,12 +45,6 @@ namespace Raytracing.Materials {
       var refract = MathR.Refract(unitDirection, hitRec.N, nOverNP);
       var scatterRay2 = new Ray(hitRec.P, refract);
       return (col, scatterRay2);
-    }
-
-    public float Schlick(float cosine, float refIndex) {
-      var r0 = (1 - refIndex) / (1 + refIndex);
-      r0 *= r0;
-      return r0 - ((1 - r0) * MathF.Pow((1 - cosine), 5));
     }
 
     #endregion Public Methods

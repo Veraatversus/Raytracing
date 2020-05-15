@@ -12,8 +12,8 @@
     #region Public Constructors
 
     public Ray(Vec3 origin, Vec3 direction) {
-      this.Origin = origin;
-      this.Direction = direction;
+      Origin = origin;
+      Direction = direction;
     }
 
     #endregion Public Constructors
