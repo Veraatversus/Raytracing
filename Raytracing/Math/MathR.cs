@@ -34,9 +34,12 @@ namespace Raytracing {
 
     public static float Clamp(this float value, float min = 0F, float max = 1F) => Math.Max(Math.Min(value, max), min);
 
+
+
     public static float Uniform(this float min, float max) {
-      lock (randomLock)
-        return ((float)random.NextDouble() * (max - min)) + min;
+      var random = new Random();
+      //lock (randomLock)
+      return ((float)random.NextDouble() * (max - min)) + min;
     }
 
     public static Vec3 RandomPointInSphere(float min = -1, float max = 1, float squareLenght = 1) {
@@ -47,7 +50,19 @@ namespace Raytracing {
         return p;
       }
     }
-
+    public static Vec3 RandomPointInDisc(float min = -1, float max = 1, float squareLenght = 1) {
+      while (true) {
+        var p = new Vec3(Uniform(min, max), Uniform(min, max), 0);
+        if (p.SquareLenght() > squareLenght)
+          continue;
+        return p;
+      }
+    }
+   
+    public static float ConvertDegreesToRadians(float degrees) {
+      var radians = MathF.PI / 180 * degrees;
+      return radians;
+    }
     #endregion Public Methods
 
     #region Private Fields

@@ -49,6 +49,8 @@
     public static Vec3 operator /(Vec3 self, float other)
      => new Vec3(self.X / other, self.Y / other, self.Z / other);
 
+    public static Vec3 Random() => new Vec3(MathR.Uniform(0, 1), MathR.Uniform(0, 1), MathR.Uniform(0, 1));
+
     public override string ToString() => $"{X}, {Y}, {Z}";
 
     #endregion Public Methods

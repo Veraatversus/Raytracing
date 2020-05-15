@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 
 namespace Raytracing {
 
@@ -19,7 +20,9 @@ namespace Raytracing {
     #region Private Methods
 
     private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
-      Raytrace.Calculate();
+      Task.Run(() => {
+        Raytrace.Calculate();
+      });
     }
 
     #endregion Private Methods
