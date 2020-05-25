@@ -49,7 +49,13 @@
     public static Vec3 operator /(Vec3 self, float other)
      => new Vec3(self.X / other, self.Y / other, self.Z / other);
 
-    public static Vec3 Random() => new Vec3(MathR.Uniform(0, 1), MathR.Uniform(0, 1), MathR.Uniform(0, 1));
+    public static Vec3 Random() => new Vec3(Rand.Rand01(), Rand.Rand01(), Rand.Rand01());
+
+    public void Deconstruct(out float r, out float g, out float b) {
+      r = R;
+      g = G;
+      b = B;
+    }
 
     public override string ToString() => $"{X}, {Y}, {Z}";
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -57,10 +56,11 @@ namespace Raytracing {
           var index = reverse ? (x + ((height - (y + 1)) * width)) : ((width * y) + x);
           var p = image[index];
 
-          var r = MathF.Sqrt(p.R);
-          var g = MathF.Sqrt(p.G);
-          var b = MathF.Sqrt(p.B);
-          builder.Append((int)(r * 255)).Append(' ').Append((int)(g * 255)).Append(' ').Append((int)(b * 255)).AppendLine();
+          //var r = MathF.Sqrt(p.R);
+          //var g = MathF.Sqrt(p.G);
+          //var b = MathF.Sqrt(p.B);
+          //builder.Append((int)(r * 255)).Append(' ').Append((int)(g * 255)).Append(' ').Append((int)(b * 255)).AppendLine();
+          builder.Append((int)p.R).Append(' ').Append((int)p.G).Append(' ').Append((int)p.B).AppendLine();
         }
       }
 

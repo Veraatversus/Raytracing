@@ -23,7 +23,7 @@
 
     public (Vec3 color, Ray ray) Scatter(Ray rIn, HitRecord hitRec) {
       var reflect = rIn.Direction.Reflect(hitRec.N);
-      var scatteredDirection = reflect + (MathR.RandomPointInSphere() * Fuzz);
+      var scatteredDirection = reflect + (MathR.RandomUnitVector() * Fuzz);
 
       if (scatteredDirection.Dot(hitRec.N) > 0) {
         var scatterRay = new Ray(hitRec.P, scatteredDirection);

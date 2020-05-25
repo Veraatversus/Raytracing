@@ -2,7 +2,7 @@
 
 namespace Raytracing {
 
-  internal class Camera {
+  public class Camera {
 
     #region Public Properties
 

@@ -27,6 +27,7 @@ namespace Raytracing.Materials {
       var cosAlpha = Math.Min(MathR.Dot(unitDirection * -1, hitRec.N), 1.0F);
       var sinAlpha = MathF.Sqrt(1.0F - (cosAlpha * cosAlpha));
 
+      // TIR
       if (nOverNP * sinAlpha > 1) {
         var reflect = MathR.Reflect(unitDirection, hitRec.N);
         var scatterRay = new Ray(hitRec.P, reflect);
@@ -35,7 +36,7 @@ namespace Raytracing.Materials {
 
       //Reflection
       var reflectionProp = MathR.Schlick(cosAlpha, RefIndex);
-      if (MathR.Uniform(0, 1) < reflectionProp) {
+      if (Rand.Rand01() < reflectionProp) {
         var reflect = MathR.Reflect(unitDirection, hitRec.N);
         var scatterRay = new Ray(hitRec.P, reflect);
         return (col, scatterRay);

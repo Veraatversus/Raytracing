@@ -32,30 +32,32 @@ namespace Raytracing {
       return rOutPerpendicular + rOutParallel;
     }
 
-    public static float Clamp(this float value, float min = 0F, float max = 1F) => Math.Max(Math.Min(value, max), min);
+    public static float Clamp(this float value, float min = 0F, float max = 1F) => MathF.Max(MathF.Min(value, max), min);
 
-    public static float Uniform(this float min, float max) {
-      var random = new Random();
-      //lock (randomLock)
-      return ((float)random.NextDouble() * (max - min)) + min;
-    }
-
-    public static Vec3 RandomPointInSphere(float min = -1, float max = 1, float squareLenght = 1) {
+    public static Vec3 RandomPointInSphere(float squareLenght = 1) {
       while (true) {
-        var p = new Vec3(Uniform(min, max), Uniform(min, max), Uniform(min, max));
+        var p = new Vec3(Rand.Rand11(), Rand.Rand11(), Rand.Rand11());
         if (p.SquareLenght() > squareLenght)
           continue;
         return p;
       }
     }
 
-    public static Vec3 RandomPointInDisc(float min = -1, float max = 1, float squareLenght = 1) {
+    public static Vec3 RandomPointInDisc(float squareLenght = 1) {
       while (true) {
-        var p = new Vec3(Uniform(min, max), Uniform(min, max), 0);
+        var p = new Vec3(Rand.Rand01(), Rand.Rand01(), 0);
         if (p.SquareLenght() > squareLenght)
           continue;
         return p;
       }
+    }
+
+    public static Vec3 RandomUnitVector() {
+      var a = Rand.Rand0Pi();
+      var z = Rand.Rand11();
+      var r = MathF.Sqrt(1.0f - (z * z));
+
+      return new Vec3(r * MathF.Cos(a), r * MathF.Sin(a), z);
     }
 
     public static float ConvertDegreesToRadians(float degrees) {
@@ -66,16 +68,9 @@ namespace Raytracing {
     public static float Schlick(float cosine, float refIndex) {
       var r0 = (1 - refIndex) / (1 + refIndex);
       r0 *= r0;
-      return r0 - ((1 - r0) * MathF.Pow((1 - cosine), 5));
+      return r0 - ((1 - r0) * MathF.Pow(1 - cosine, 5));
     }
 
     #endregion Public Methods
-
-    #region Private Fields
-
-    private static readonly object randomLock = new object();
-    private static readonly Random random = new Random();
-
-    #endregion Private Fields
   }
 }

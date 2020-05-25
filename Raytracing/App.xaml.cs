@@ -12,7 +12,7 @@ namespace Raytracing {
       AllocConsole();
       Task.Run(() => {
         var cv = new CoreValues {
-          Samplecount = 100,
+          Samplecount = 1000,
           maxDepth = 20,
         };
         Raytrace.Calculate(cv);

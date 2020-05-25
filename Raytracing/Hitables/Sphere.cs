@@ -45,6 +45,12 @@ namespace Raytracing {
           var normal = (intersect - Center) / Radius;
           return new HitRecord(t, intersect, normal, ray, Material);
         }
+        var t2 = (-halfB + root) / a;
+        if (t2 < tMax && t2 > tMin) {
+          var p = ray.PointAtParameter(t2);
+          var outwardNormal = (p - Center) / Radius;
+          return new HitRecord(t2, p, outwardNormal, ray, Material);
+        }
       }
       return null;
     }

@@ -19,7 +19,7 @@
     #region Public Methods
 
     public (Vec3 color, Ray ray) Scatter(Ray rIn, HitRecord hitRec) {
-      var scatteredDirection = hitRec.N + MathR.RandomPointInSphere();
+      var scatteredDirection = hitRec.N + MathR.RandomUnitVector();
       var scatterRay = new Ray(hitRec.P, scatteredDirection);
       return (Color, scatterRay);
     }
